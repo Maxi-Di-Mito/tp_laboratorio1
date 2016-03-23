@@ -54,19 +54,18 @@ int main()
                 break;
             case FACTORIAL:
                 resultado = factorial(x);
-                printf("Resultado FACTORIAL: %.2f\n",resultado);
+
                 break;
             case TODAS:
                 resultado = suma(x,y);
                 printf("Resultado SUMA: %.2f\n",resultado);
                 resultado = resta(x,y);
-                printf("Resultado RESTA: %.2f\n",resultado);
+
                 resultado = division(x,y);
-                printf("Resultado DIVISION: %.2f\n",resultado);
+
                 resultado = multiplicacion(x,y);
-                printf("Resultado MULTIPLICACION: %.2f\n",resultado);
+
                 resultado = factorial(x);
-                printf("Resultado FACTORIAL: %.2f\n",resultado);
                 break;
         }
     }
