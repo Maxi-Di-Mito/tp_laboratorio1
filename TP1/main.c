@@ -60,11 +60,8 @@ int main()
                 resultado = suma(x,y);
                 printf("Resultado SUMA: %.2f\n",resultado);
                 resultado = resta(x,y);
-
                 resultado = division(x,y);
-
                 resultado = multiplicacion(x,y);
-
                 resultado = factorial(x);
                 break;
         }
