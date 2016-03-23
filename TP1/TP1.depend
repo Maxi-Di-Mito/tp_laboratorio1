@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1458175911 source:f:\tp1\main.c
+1458774290 source:f:\tp1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"operaciones.h"
 
-1458174819 f:\tp1\operaciones.h
+1458774384 f:\tp1\operaciones.h
 
 1458685737 source:e:\tp1\main.c
 	<stdio.h>

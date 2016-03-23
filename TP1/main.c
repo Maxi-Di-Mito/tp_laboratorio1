@@ -10,20 +10,20 @@
 #define FACTORIAL 7
 #define TODAS 8
 #define SALIR 9
-
-void imprimirMenu();
+#define MENSAJE_DIVISION_CERO printf("Resultado DIVISION: No se puede dividir por cero\n")
+void imprimirMenu(float x, float y);
 float pedirNumero();
 
-float x = 0;
-float y = 0;
 
 int main()
 {
-    char opcion = 0;
+    float x = 0;
+    float y = 0;
     float resultado;
+    char opcion = 0;
     while(opcion != 9)
     {
-        imprimirMenu();
+        imprimirMenu(x,y);
         scanf("%d",&opcion);
         system("cls");
         switch(opcion)
@@ -37,32 +37,40 @@ int main()
                 y = pedirNumero();
                 break;
             case SUMA:
-                resultado = suma(x,y);
+                resultado = sumar(x,y);
                 printf("Resultado SUMA: %.2f\n",resultado);
                 break;
             case RESTA:
-                resultado = resta(x,y);
+                resultado = restar(x,y);
                 printf("Resultado RESTA: %.2f\n",resultado);
                 break;
             case DIVISION:
-                resultado = division(x,y);
-                printf("Resultado DIVISION: %.2f\n",resultado);
+                if(validarYDividir(x,y,&resultado))
+                    printf("Resultado DIVISION: %.2f\n",resultado);
+                else
+                    MENSAJE_DIVISION_CERO;
                 break;
             case MULTIPLICACION:
-                resultado = multiplicacion(x,y);
+                resultado = multiplicar(x,y);
                 printf("Resultado MULTIPLICACION: %.2f\n",resultado);
                 break;
             case FACTORIAL:
-                resultado = factorial(x);
-
+                resultado = calcularFactorial(x);
+                printf("Resultado FACTORIAL: %d\n",(int)resultado);
                 break;
             case TODAS:
-                resultado = suma(x,y);
+                resultado = sumar(x,y);
                 printf("Resultado SUMA: %.2f\n",resultado);
-                resultado = resta(x,y);
-                resultado = division(x,y);
-                resultado = multiplicacion(x,y);
-                resultado = factorial(x);
+                resultado = restar(x,y);
+                printf("Resultado RESTA: %.2f\n",resultado);
+                if(validarYDividir(x,y,&resultado))
+                    printf("Resultado DIVISION: %.2f\n",resultado);
+                else
+                    printf("Resultado DIVISION: No se puede dividir por cero\n");
+                resultado = multiplicar(x,y);
+                printf("Resultado MULTIPLICACION: %.2f\n",resultado);
+                resultado = calcularFactorial(x);
+                printf("Resultado FACTORIAL: %d\n",(int)resultado);
                 break;
         }
     }
@@ -70,7 +78,7 @@ int main()
 }
 
 //FUNCIONES AUXILIARES
-void imprimirMenu()
+void imprimirMenu(float x, float y)
 {
     printf("1-Ingresar 1er operando(A=%.2f)\n",x);
     printf("2-Ingresar 2do operando(B=%.2f)\n",y);
@@ -78,7 +86,7 @@ void imprimirMenu()
     printf("4-Calcular la resta\n");
     printf("5-Calcular la division\n");
     printf("6-Calcular la multiplicacion\n");
-    printf("7-Calcular el factorial\n");
+    printf("7-Calcular el factorial(A!)\n");
     printf("8-Calcular todas las operaciones\n");
     printf("9-Salir\n");
 }

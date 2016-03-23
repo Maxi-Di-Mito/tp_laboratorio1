@@ -1,33 +1,44 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
 
-void suma(float a, float b)
+float sumar(float a, float b)
 {
     return a+b;
 }
-void resta(float a, float b)
+float restar(float a, float b)
 {
     float resultado = a-b;
-    printf("Resultado RESTA: %.2f\n",resultado);
+    return resultado;
 }
-void division(float a, float b)
+float dividir(float a, float b)
 {
-    float resultado = a/b;
-    printf("Resultado DIVISION: %.2f\n",resultado);
+    return a/b;
 }
-void multiplicacion(float a, float b)
+
+float validarYDividir(float a, float b, float *resultado)
+{
+    if(b == 0)
+    {
+        return 0;
+    }else
+    {
+        *resultado = dividir(a,b);
+        return 1;
+    }
+}
+
+float multiplicar(float a, float b)
 {
     float resultado =a*b;
-    printf("Resultado MULTIPLICACION: %.2f\n",resultado);
+    return resultado;
 }
-void factorial(float a)
+float calcularFactorial(float a)
 {
-    int resultado = 1;
-    int f = (int)a;
-    for(;f> 1;f--)
-        resultado *= f;
-
-    printf("Resultado FACTORIAL: %.2f\n",resultado);
+    long f = (long) a;
+    if(f == 0)
+        return 1;
+    else
+        return f*calcularFactorial(f-1);
 }
 
 
