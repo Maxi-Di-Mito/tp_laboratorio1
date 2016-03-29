@@ -11,6 +11,7 @@
 #define TODAS 8
 #define SALIR 9
 #define MENSAJE_DIVISION_CERO printf("Resultado DIVISION: No se puede dividir por cero\n")
+
 void imprimirMenu(float x, float y);
 float pedirNumero();
 
@@ -20,7 +21,7 @@ int main()
     float x = 0;
     float y = 0;
     float resultado;
-    char opcion = 0;
+    int opcion = 0;
     while(opcion != 9)
     {
         imprimirMenu(x,y);
