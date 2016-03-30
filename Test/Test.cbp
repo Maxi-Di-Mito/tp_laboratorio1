@@ -6,9 +6,12 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
+			<Script file="lib_finder.script" />
 			<Target title="Debug">
 				<Option output="bin/Debug/Test" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
+				<Option external_deps="../md_lib/md_lib/lib.h;" />
+				<Option additional_output="../md_lib/md_lib/lib.h;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -18,6 +21,7 @@
 			<Target title="Release">
 				<Option output="bin/Release/Test" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
+				<Option additional_output="../md_lib/md_lib/lib.h;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -31,6 +35,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Linker>
+			<Add directory="../md_lib/md_lib" />
+		</Linker>
+		<Unit filename="../md_lib/lib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../md_lib/lib.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
