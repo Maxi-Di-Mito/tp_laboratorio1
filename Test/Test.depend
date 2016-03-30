@@ -3,10 +3,17 @@
 	<stdio.h>
 	<stdlib.h>
 
-1459288911 source:e:\test\main.c
+1459296414 source:e:\test\main.c
 	<stdio.h>
 	<stdlib.h>
-	"../md_lib/md_lib/lib.h"
+	"../md_lib/lib.h"
 
-1459288855 e:\md_lib\md_lib\lib.h
+1459292635 e:\md_lib\md_lib\lib.h
+
+1459292543 source:e:\md_lib\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+
+1459292635 e:\md_lib\lib.h
 
