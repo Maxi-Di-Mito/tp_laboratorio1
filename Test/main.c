@@ -1,31 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../md_lib/lib.h"
-
+#define MAX_INPUT 51
 int main()
 {
-    float gastos[30],g;
-    int i,dia;
-    for(i = 0; i<30;i++)
-    {
-        gastos[i]=0;
-    }
+    char s1[10] = "perro";
+    char s2[10] = "perros";
 
-    do
-    {
-        printf("Ingrese dia\n");
-        scanf("%d",&dia);
-        printf("Ingrese gasto\n");
-        scanf("%f",&g);
-        gastos[dia-1] +=g;
-    }while(confirmacion("Desea ingresar mas datos (s/n)?",'s','n'));
+    int a = confirmacion("QUE ONDA?",'s','n');
+    printf("%d",a);
 
-    for(i=0;i<30;i++)
-    {
-        printf("%.2f\n",gastos[i]);
-    }
-
-
-
-    return 0;
 }
+

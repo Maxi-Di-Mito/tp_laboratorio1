@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-int confirmacion(char* mensaje, char op1, char op2)
+int confirmacion(char* mensaje, char op1, char op2,int cantidadIntentos)
 {
     char c;
     do
@@ -10,6 +10,12 @@ int confirmacion(char* mensaje, char op1, char op2)
         printf("%s\n",mensaje);
         fflush(stdin);
         scanf("%c",&c);
-    }while(tolower(c) != tolower(op1) && tolower(c)!= tolower(op2));
+        cantidadIntentos--;
+    }while((tolower(c) != tolower(op1) && tolower(c)!= tolower(op2)) || cantidadIntentos != 0);
     return c == op1;
+}
+
+int confirmacionSinReintentos(char* mensaje, char op1, char op2)
+{
+    confirmacion(mensaje,op1,op2,0);
 }
