@@ -1,7 +1,9 @@
 # depslib dependency file v1.0
-1458169934 source:f:\test\main.c
+1459986931 source:f:\test\main.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
+	"../md_lib/lib.h"
 
 1459385224 source:e:\test\main.c
 	<stdio.h>
@@ -18,8 +20,10 @@
 
 1459292635 e:\md_lib\lib.h
 
-1459292543 source:f:\md_lib\lib.c
+1459981778 source:f:\md_lib\lib.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
+
+1459983740 f:\md_lib\lib.h
 
