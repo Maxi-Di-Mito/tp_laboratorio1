@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1460501830 source:d:\repo\tp_laboratorio_1\md_lib\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+
+1460505495 source:d:\repo\tp_laboratorio_1\tp2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1460505176 d:\repo\tp_laboratorio_1\tp2\funciones.h
+	"structs.h"
+
+1460505388 d:\repo\tp_laboratorio_1\tp2\structs.h
+
+1460505230 source:d:\repo\tp_laboratorio_1\tp2\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	"structs.h"
+
