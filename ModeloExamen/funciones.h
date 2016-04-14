@@ -10,7 +10,7 @@ typedef struct Empleado
 }Empleado;
 
 
-void printMenu();
+void printMenu();void informar(Empleado nomina[], int largo);
 
 Empleado *buscarLugar(Empleado nomina[], int largo);
 
@@ -23,4 +23,6 @@ void altas(Empleado nomina[], int largo);
 void modificar(Empleado nomina[], int largo);
 
 void baja(Empleado nomina[], int largo);
+
+void informar(Empleado nomina[], int largo);
 

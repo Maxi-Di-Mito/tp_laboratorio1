@@ -51,13 +51,14 @@ Empleado *buscarLegajo(Empleado nomina[],int largo,int legajo)
 void altas(Empleado nomina[], int largo)
 {
     char aux[100];
+    Empleado empAux;///USAR en vez de aux
     int proximoLegajo;
     Empleado *l = buscarLugar(nomina, largo);
     if(l != NULL)
     {
         proximoLegajo = buscarProxLegajo(nomina,largo);
         if(!pedirString(aux,"Ingrese nombre\n",2,50,"El nombre debe tener entre 2 y 50 caracteres\n"))
-            return;
+            return;// PROPAGAR ERROR PARA ARRIBA
         strcpy(l->nombre,aux);
 
         if(!pedirString(aux,"Ingresar apellido\n",2,50,"El apellido debe tener entre 2 y 50 caracteres\n"))
@@ -125,5 +126,8 @@ void baja(Empleado nomina[], int largo)
     }
 }
 
+void informar(Empleado nomina[], int largo)
+{
 
+}
 

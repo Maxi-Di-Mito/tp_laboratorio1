@@ -31,7 +31,7 @@ void swap(void *vp1,void *vp2,int size)
 
 int pedirInt(int *dato,char* msg, int max, int min, char* errorMsg)
 {
-    long buff;
+    long buff;// CAMBIAR usando string y parsear
     short int error = 0;
     short int continuar = 1;
     do
@@ -48,7 +48,7 @@ int pedirInt(int *dato,char* msg, int max, int min, char* errorMsg)
             continuar = confirmacionSinReintentos("Desea continuar S/N\n",'s','n');
         }
     }while(continuar && !error);
-    if(!error)
+    if(!error && continuar)
     {
         *dato = (int)buff;
     }

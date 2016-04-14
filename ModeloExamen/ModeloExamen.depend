@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1460588472 source:c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\modeloexamen\funciones.c
+1460591393 source:c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\modeloexamen\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"funciones.h"
 	"../md_lib/lib.h"
 
-1460591079 c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\modeloexamen\funciones.h
+1460591182 c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\modeloexamen\funciones.h
 
 1460589374 source:c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\md_lib\lib.c
 	<stdio.h>
@@ -14,7 +14,7 @@
 	<ctype.h>
 	<string.h>
 
-1460590747 source:c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\modeloexamen\main.c
+1460591157 source:c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\modeloexamen\main.c
 	<stdio.h>
 	<stdlib.h>
 	"funciones.h"

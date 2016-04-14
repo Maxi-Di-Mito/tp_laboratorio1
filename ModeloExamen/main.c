@@ -31,7 +31,7 @@ int main()
                 baja(nomina,CANTIDAD);
                 break;
             case INFORMAR:
-                //informar(nomina);
+                informar(nomina,CANTIDAD);
                 break;
             case LISTAR:
                 //listar();
