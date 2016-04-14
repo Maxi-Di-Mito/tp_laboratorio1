@@ -25,10 +25,10 @@ int main()
                 altas(nomina,CANTIDAD);
                 break;
             case MODIFICAR:
-                //modificar(nomina);
+                modificar(nomina, CANTIDAD);
                 break;
             case BAJA:
-                //baja(nomina);
+                baja(nomina,CANTIDAD);
                 break;
             case INFORMAR:
                 //informar(nomina);

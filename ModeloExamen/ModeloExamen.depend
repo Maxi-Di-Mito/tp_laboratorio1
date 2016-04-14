@@ -6,14 +6,15 @@
 	"funciones.h"
 	"../md_lib/lib.h"
 
-1460589558 c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\modeloexamen\funciones.h
+1460591079 c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\modeloexamen\funciones.h
 
-1460588425 source:c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\md_lib\lib.c
+1460589374 source:c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\md_lib\lib.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
+	<string.h>
 
-1460588158 source:c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\modeloexamen\main.c
+1460590747 source:c:\users\alumno.lab5pc03\repo\tp_laboratorio_1\modeloexamen\main.c
 	<stdio.h>
 	<stdlib.h>
 	"funciones.h"
