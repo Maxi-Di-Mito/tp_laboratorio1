@@ -8,7 +8,7 @@ int confirmacion(char* mensaje, char op1, char op2,int cantidadIntentos)
     char c;
     do
     {
-        printf("%s\n",mensaje);
+        printf("%s",mensaje);
         fflush(stdin);
         scanf("%c",&c);
         cantidadIntentos--;
@@ -31,78 +31,101 @@ void swap(void *vp1,void *vp2,int size)
 
 int pedirInt(int *dato,char* msg, int max, int min, char* errorMsg)
 {
-    long buff;// CAMBIAR usando string y parsear
-    short int error = 0;
+    char buff[4000];
+    long datoAuxiliar;
+    short int hayError = 0;
     short int continuar = 1;
+    char *charError = NULL;
+
     do
     {
-        if(!error)
+        hayError = 0;
+        printf("%s",msg);
+        scanf("%s",buff);
+        datoAuxiliar = strtol(buff,&charError,10);
+        //VALIDAR datoAuxliar dentro del rango de un INT
+        if(*charError != '\0')
         {
-            printf("%s",msg);
+            hayError = 1;
+            printf("El caracter | %c | no es valido\n",*charError);
         }
-        error = scanf("%ld",&buff);
-        if((buff > max && max !=-1) || (buff < min) || error)
+
+        if(hayError)
         {
-            error = 1;
             printf("%s",errorMsg);
-            continuar = confirmacionSinReintentos("Desea continuar S/N\n",'s','n');
+            continuar = confirmacionSinReintentos("Desea intentar otra vez (s/n)?\n",'s','n');
         }
-    }while(continuar && !error);
-    if(!error && continuar)
+    }while(continuar && hayError);
+    if(!hayError)
     {
-        *dato = (int)buff;
+        *dato = (int)datoAuxiliar;
+        return 0;
     }
-    return continuar;
+    return -1;
 }
 
 int pedirLong(long *dato,char* msg, int max, int min, char* errorMsg)
 {
-    long buff;
-    short int error = 0;
+    char buff[4000];
+    short int hayError = 0;
     short int continuar = 1;
+    char *charError = NULL;
+
     do
     {
-        if(!error)
+        hayError = 0;
+        printf("%s",msg);
+        scanf("%s",buff);
+        *dato = strtol(buff,&charError,10);
+
+        if(*charError != '\0')
         {
-            printf("%s",msg);
+            hayError = 1;
+            printf("El caracter %c no es valido\n",*charError);
         }
-        error = scanf("%ld",&buff);
-        if((buff > max && max !=-1) || (buff < min) || error)
+
+        if(hayError)
         {
-            error = 1;
             printf("%s",errorMsg);
-            continuar = confirmacionSinReintentos("Desea continuar S/N\n",'s','n');
+            continuar = confirmacionSinReintentos("Desea intentar otra vez (s/n)?\n",'s','n');
         }
-    }while(continuar && !error);
-    if(!error)
+    }while(continuar && hayError);
+    if(!hayError)
     {
-        *dato = buff;
+        return 0;
     }
-    return continuar;
+    return -1;
 }
 
 int pedirString(char* dato,char* msg, int max, int min, char*errorMsg)
 {
     char buff[4000];
-    short int error = 0;
+    short int hayError = 0;
     short int continuar = 1;
     do
     {
-        if(!error)
+        printf("%s",msg);
+
+        scanf("%s",buff);
+        if(strlen(buff) > max)
         {
-            printf("%s",msg);
+            hayError = 1;
         }
-        error = scanf("%s",buff);
-        if((strlen(buff) > max && max !=-1) || (strlen(buff) < min) || error)
+        if(!hayError && strlen(buff) < min)
         {
-            error = 1;
+            hayError = 1;
+        }
+
+        if(hayError)
+        {
             printf("%s",errorMsg);
-            continuar = confirmacionSinReintentos("Desea continuar S/N\n",'s','n');
+            continuar = confirmacionSinReintentos("Desea intentar otra vez?\n",'s','n');
         }
-    }while(continuar && !error);
-    if(!error)
+    }while(continuar && hayError);
+    if(!hayError)
     {
         strcpy(dato,buff);
+        return 0;
     }
-    return continuar;
+    return -1;
 }
