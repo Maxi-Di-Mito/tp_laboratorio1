@@ -3,12 +3,13 @@
 #include "../md_lib/lib.h"
 #include "structs.h"
 
-
-char *personaToString(Persona p)
+void iniciarArray(Persona gente[])
 {
-    char* ret = NULL;
-    sprintf(ret,"Nombre: %s , Edad: %d, DNI: %ld",p.nombre,p.edad,p.dni);
-    return ret;
+    int i;
+    for(i=0;i<CANTIDAD;i++)
+    {
+        gente[i].inUseFlag = 0;
+    }
 }
 
 
@@ -23,7 +24,7 @@ Persona *findPlace(Persona gente[])
     int i;
     for(i=0;i < CANTIDAD;i++)
     {
-        if(!gente[i].inUseFlag)
+        if(gente[i].inUseFlag == 0)
         {
             return &gente[i];
         }
@@ -56,24 +57,35 @@ void agregarPersona(Persona gente[])
 
 void listarPorNombre(Persona gente[])
 {
+    int cantidadDePersonas = 0;
     int i,j;
     Persona personaAuxiliar;
-    for(i=0;i<CANTIDAD-1;i++)
+    for(i = 0; i< CANTIDAD;i++)
     {
-        for(j=i;j<CANTIDAD;j++)
+        if(gente[i].inUseFlag == 1)
+            cantidadDePersonas++;
+    }
+
+    if(cantidadDePersonas > 1)
+    {
+        for(i=0;i<CANTIDAD-1;i++)
         {
-            if(strcmp(gente[i],gente[j]) > 0)
+            for(j=i;j<CANTIDAD;j++)
             {
-                personaAuxiliar = gente[i];
-                gente[i] = gente[j];
-                gente[j] = personaAuxiliar;
+                if(strcmp(gente[i],gente[j]) > 0)
+                {
+                    personaAuxiliar = gente[i];
+                    gente[i] = gente[j];
+                    gente[j] = personaAuxiliar;
+                }
             }
         }
     }
 
     for(i = 0; i< CANTIDAD;i++)
     {
-        printf(personaToString(gente[i]));
+        if(gente[i].inUseFlag)
+            printf("Nombre: %s | Edad: %d | DNI: %d\n",gente[i].nombre,gente[i].edad,gente[i].dni);
     }
 
 

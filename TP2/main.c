@@ -5,6 +5,7 @@
 int main()
 {
     Persona personas[CANTIDAD];
+    iniciarArray(personas);
     int opcion = 1;
 
     while(opcion != SALIR)

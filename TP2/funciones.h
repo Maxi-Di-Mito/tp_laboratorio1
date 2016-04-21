@@ -1,6 +1,7 @@
 #include"structs.h"
 
-char* personaToString(Persona p);
+
+void iniciarArray(Persona gente[]);
 
 void mostrarMenuYElegir(int* op);
 
