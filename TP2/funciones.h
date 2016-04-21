@@ -8,7 +8,7 @@ Persona *findPlace(Persona gente[]);
 
 void agregarPersona(Persona gente[]);
 
-
+void listarPorNombre(Persona gente[]);
 
 
 

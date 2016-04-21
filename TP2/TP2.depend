@@ -19,3 +19,28 @@
 	<stdlib.h>
 	"structs.h"
 
+1461197880 source:c:\repo\tp_laboratorio_1\md_lib\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<errno.h>
+
+1461190560 source:c:\repo\tp_laboratorio_1\tp2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1461195519 c:\repo\tp_laboratorio_1\tp2\funciones.h
+	"structs.h"
+
+1461187694 c:\repo\tp_laboratorio_1\tp2\structs.h
+
+1461197911 source:c:\repo\tp_laboratorio_1\tp2\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	"../md_lib/lib.h"
+	"structs.h"
+
+1461189981 c:\repo\tp_laboratorio_1\md_lib\lib.h
+

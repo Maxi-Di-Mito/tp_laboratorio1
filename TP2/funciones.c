@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../md_lib/lib.h"
 #include "structs.h"
+
 
 char *personaToString(Persona p)
 {
@@ -34,21 +36,47 @@ Persona *findPlace(Persona gente[])
 void agregarPersona(Persona gente[])
 {
     Persona *p = findPlace(gente);
+    int retorno;
     if(p != NULL)
     {
-        printf("Ingrese Nombre:\n");
-        scanf("%s",p->nombre);
+        retorno = pedirString(p->nombre,"Ingrese Nombre:\n",30,3,"El nombre de tener entre 3 y 30 caracteres\n");
 
-        printf("Ingrese Edad:\n");
-        scanf("%d",&p->edad);
-
-        printf("Ingrese DNI:\n");
-        scanf("%ld",&p->dni);
+        if(retorno != -1)
+            retorno = pedirInt(&p->edad,"Ingrese edad:\n",120,1,"Ingrese una edad valida\n");
+        if(retorno != -1)
+            retorno = pedirLong(&p->dni,"Ingrese DNI:\n",0,1,"El DNI debe ser valido\n");
+        if(retorno != -1)
+            p->inUseFlag = 1;
     }else
     {
         printf("No hay mas espacio\n");
     }
 }
 
+
+void listarPorNombre(Persona gente[])
+{
+    int i,j;
+    Persona personaAuxiliar;
+    for(i=0;i<CANTIDAD-1;i++)
+    {
+        for(j=i;j<CANTIDAD;j++)
+        {
+            if(strcmp(gente[i],gente[j]) > 0)
+            {
+                personaAuxiliar = gente[i];
+                gente[i] = gente[j];
+                gente[j] = personaAuxiliar;
+            }
+        }
+    }
+
+    for(i = 0; i< CANTIDAD;i++)
+    {
+        printf(personaToString(gente[i]));
+    }
+
+
+}
 
 
