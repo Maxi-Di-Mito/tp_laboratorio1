@@ -10,3 +10,4 @@ int pedirLong(long *dato,char* msg, int max, int min, char* errorMsg);
 
 int pedirString(char* dato,char* msg, int max, int min, char*errorMsg);
 
+int pedirFloat(float *dato, char* mensaje , char* errorMensaje);
