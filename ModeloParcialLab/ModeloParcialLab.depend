@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1461803247 source:c:\modeloparciallab\lib.c
+	"lib.h"
+
+1461803263 c:\modeloparciallab\lib.h
+	<stdio.h>
+	<stdlib.h>
+	"types.h"
+	"../tp_laboratorio_1/md_lib/lib.h"
+
+1461800411 c:\modeloparciallab\types.h
+
+1461802442 c:\tp_laboratorio_1\md_lib\lib.h
+
+1461802079 source:c:\tp_laboratorio_1\md_lib\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+
+1461803277 source:c:\modeloparciallab\main.c
+	"lib.h"
+
