@@ -43,3 +43,28 @@
 
 1461189981 c:\repo\tp_laboratorio_1\md_lib\lib.h
 
+1461897141 source:c:\laboratorio\tp_laboratorio_1\md_lib\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+
+1461900424 source:c:\laboratorio\tp_laboratorio_1\tp2\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	"../md_lib/lib.h"
+	"structs.h"
+	"string.h"
+
+1461897141 c:\laboratorio\tp_laboratorio_1\md_lib\lib.h
+
+1461897141 c:\laboratorio\tp_laboratorio_1\tp2\structs.h
+
+1461899514 source:c:\laboratorio\tp_laboratorio_1\tp2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1461899528 c:\laboratorio\tp_laboratorio_1\tp2\funciones.h
+	"structs.h"
+

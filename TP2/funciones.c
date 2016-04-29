@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../md_lib/lib.h"
 #include "structs.h"
+#include "string.h"
 
 void iniciarArray(Persona gente[])
 {
@@ -32,7 +33,16 @@ Persona *findPlace(Persona gente[])
     return NULL;
 }
 
-
+Persona *buscarPorDNI(Persona gente[], long dni)
+{
+    int i;
+    for(i=0;i<CANTIDAD;i++)
+    {
+        if(gente[i].dni == dni && gente[i].inUseFlag)
+            return &gente[i];
+    }
+    return NULL;
+}
 
 void agregarPersona(Persona gente[])
 {
@@ -70,14 +80,18 @@ void listarPorNombre(Persona gente[])
     {
         for(i=0;i<CANTIDAD-1;i++)
         {
-            for(j=i;j<CANTIDAD;j++)
+            for(j=i+1;j<CANTIDAD;j++)
             {
-                if(strcmp(gente[i],gente[j]) > 0)
+                if(gente[i].inUseFlag && gente[j].inUseFlag)
                 {
-                    personaAuxiliar = gente[i];
-                    gente[i] = gente[j];
-                    gente[j] = personaAuxiliar;
+                    if(strcmp(gente[i].nombre,gente[j].nombre) > 0)
+                    {
+                        personaAuxiliar = gente[i];
+                        gente[i] = gente[j];
+                        gente[j] = personaAuxiliar;
+                    }
                 }
+
             }
         }
     }
@@ -87,8 +101,80 @@ void listarPorNombre(Persona gente[])
         if(gente[i].inUseFlag)
             printf("Nombre: %s | Edad: %d | DNI: %d\n",gente[i].nombre,gente[i].edad,gente[i].dni);
     }
+}
 
 
+void borrarPersona(Persona gente[])
+{
+    listarPorNombre(gente);
+    long dniToDelete;
+    Persona *personaABorrar = NULL;
+    int hayError = pedirLong(&dniToDelete,"Ingrese DNI de la persona a eliminar\n",0,1,"Ingrese un DNI valido\n");
+    if(!hayError)
+    {
+        personaABorrar = buscarPorDNI(gente,dniToDelete);
+        if(personaABorrar != NULL)
+        {
+            personaABorrar->inUseFlag = 0;
+        }else
+        {
+            printf("El DNI no corresponde a ninguna persona cargada\n");
+        }
+    }
+}
+
+
+void graficar(Persona gente[])
+{
+    int i;
+    int a = 0;
+    int b = 0;
+    int c = 0;
+    int tope = 0;
+
+    for(i=0;i<CANTIDAD;i++)
+    {
+        if(gente[i].inUseFlag && gente[i].edad > 35)
+            c++;
+        else if(gente[i].inUseFlag && gente[i].edad > 18)
+            b++;
+        else if(gente[i].inUseFlag && gente[i].edad <= 18)
+            a++;
+    }
+    if(a>tope)
+        tope= a;
+    if(b>tope)
+        tope= b;
+    if(c>tope)
+        tope= c;
+
+    char array[3][20];
+
+    for(i=0;i<20;i++)
+    {
+        array[0][i] = ' ';
+        array[1][i] = ' ';
+        array[2][i] = ' ';
+    }
+
+    for(i = 0; i < a;i++)
+    {
+        array[0][i] = '*';
+    }
+    for(i = 0; i < b;i++)
+    {
+        array[1][i] = '*';
+    }
+    for(i = 0; i < c;i++)
+    {
+        array[2][i] = '*';
+    }
+
+    for(i = tope-1; i>=0; i--)
+    {
+        printf(" %c      %c      %c\n",array[0][i],array[1][i],array[2][i]);
+    }
+    printf("<18  19-35  >35\n");
 }
 
 

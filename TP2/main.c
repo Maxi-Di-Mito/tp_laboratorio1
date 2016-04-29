@@ -17,14 +17,14 @@ int main()
             case AGREGAR:
                 agregarPersona(personas);
                 break;
-            //case BORRAR:
-             //   borrarPersona(personas);
-             //   break;
+            case BORRAR:
+                borrarPersona(personas);
+                break;
             case LISTAR:
                 listarPorNombre(personas);
                 break;
-           // case GRAFICAR:
-            //    graficar(personas);*/
+            case GRAFICAR:
+                graficar(personas);
         }
     }
     return 0;
