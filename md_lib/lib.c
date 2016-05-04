@@ -49,7 +49,7 @@ int pedirInt(int *dato,char* msg, int max, int min, char* errorMsg)
             hayError = 1;
             printf("El caracter | %c | no es valido\n",*charError);
         }
-        if(!hayError && ( max != 0 && datoAuxiliar > max  || datoAuxiliar < min) )
+        if(!hayError && ( (max != 0 && datoAuxiliar > max)  || datoAuxiliar < min) )
         {
             hayError = 1;
         }
@@ -111,7 +111,7 @@ int pedirString(char* dato,char* msg, int max, int min, char*errorMsg)
         hayError = 0;
         printf("%s",msg);
 
-        scanf("%s",buff);
+        scanf(" %[^\n]s",buff);
         if(strlen(buff) > max)
         {
             hayError = 1;
