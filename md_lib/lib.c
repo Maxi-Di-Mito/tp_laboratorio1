@@ -108,6 +108,7 @@ int pedirString(char* dato,char* msg, int max, int min, char*errorMsg)
     short int continuar = 1;
     do
     {
+        hayError = 0;
         printf("%s",msg);
 
         scanf("%s",buff);

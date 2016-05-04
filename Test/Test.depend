@@ -27,3 +27,17 @@
 
 1459983740 f:\md_lib\lib.h
 
+1462327735 source:c:\repo\tp_laboratorio_1\md_lib\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+
+1462327735 source:c:\repo\tp_laboratorio_1\test\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../md_lib/lib.h"
+
+1462327735 c:\repo\tp_laboratorio_1\md_lib\lib.h
+
