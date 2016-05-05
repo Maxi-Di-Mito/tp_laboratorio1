@@ -111,7 +111,7 @@ int pedirString(char* dato,char* msg, int max, int min, char*errorMsg)
         hayError = 0;
         printf("%s",msg);
 
-        scanf(" %[^\n]s",buff);
+        scanf("%s",buff);
         if(strlen(buff) > max)
         {
             hayError = 1;
