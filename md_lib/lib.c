@@ -23,7 +23,7 @@ int confirmacionSinReintentos(char* mensaje, char op1, char op2)
 
 void swap(void *vp1,void *vp2,int size)
 {
-  char buf[size];
+  void *buf = malloc(size);
   memcpy(buf,vp1,size);
   memcpy(vp1,vp2,size);
   memcpy(vp2,buf,size);  //memcpy ->inbuilt function in std-c
