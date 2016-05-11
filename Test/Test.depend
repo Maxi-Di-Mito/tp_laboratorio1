@@ -27,7 +27,7 @@
 
 1459983740 f:\md_lib\lib.h
 
-1462327735 source:c:\repo\tp_laboratorio_1\md_lib\lib.c
+1463001805 source:c:\repo\tp_laboratorio_1\md_lib\lib.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -39,5 +39,11 @@
 	<string.h>
 	"../md_lib/lib.h"
 
-1462327735 c:\repo\tp_laboratorio_1\md_lib\lib.h
+1463001805 c:\repo\tp_laboratorio_1\md_lib\lib.h
+
+1463002761 source:c:\repo\tp_laboratorio_1\test\lib.c
+	"lib.h"
+
+1463002542 c:\repo\tp_laboratorio_1\test\lib.h
+	"../md_lib/lib.h"
 

@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1463005825 source:c:\repo\tp_laboratorio_1\md_lib\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+
+1463002982 source:c:\repo\tp_laboratorio_1\practica\lib.c
+	"lib.h"
+
+1463004030 c:\repo\tp_laboratorio_1\practica\lib.h
+	"../md_lib/lib.h"
+	"../parser.h"
+
+1463001805 c:\repo\tp_laboratorio_1\md_lib\lib.h
+
+1463008691 source:c:\repo\tp_laboratorio_1\practica\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"lib.h"
+
+1462995882 c:\repo\tp_laboratorio_1\parser.h
+
+1462996070 source:c:\repo\tp_laboratorio_1\parser.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"parser.h"
+
