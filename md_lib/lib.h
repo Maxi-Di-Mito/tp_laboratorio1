@@ -75,3 +75,18 @@ int pedirLong(long *dato,char* msg, int max, int min, char* errorMsg);
  *
  */
 int pedirFloat(float *dato, char* mensaje , char* errorMensaje);
+
+
+
+
+/** \brief Ordenar una lista de elementos de cualquier tipo
+ * \param lista  puntero a la lista de elementos
+ * \param datasize  tamaño del dato que se va a ordenar
+ * \param size  cantidad de elementos en la lista
+ * \param cmp puntero a la funcion que compara
+ * \param order  un char 'a' para orden ascendente y 'd' para descendente
+ *
+ * \return void
+ */
+void ordenar(void *lista, int dataSize,int size, int (*cmp)(),char order);
+

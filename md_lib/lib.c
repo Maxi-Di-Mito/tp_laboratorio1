@@ -171,3 +171,31 @@ int pedirFloat(float *dato, char* mensaje , char* errorMensaje)
 
 
 
+
+void ordenar(void *lista, int dataSize,int size, int (*cmp)(),char order)
+{
+    int i,j;
+    for(i=0;i<size-1;i++)
+    {
+        for(j=i+1;j<size;j++)
+        {
+            if( order == 'a')
+            {
+                if(cmp(lista+(i*dataSize),lista+(j*dataSize)) > 0)
+                {
+                    swap(lista+(i*dataSize),lista+(j*dataSize),dataSize);
+                }
+            }
+            if(order == 'd')
+            {
+                if(cmp(lista+(i*dataSize),lista+(j*dataSize)) < 0)
+                {
+                    swap(lista+(i*dataSize),lista+(j*dataSize),dataSize);
+                }
+            }
+        }
+    }
+}
+
+
+
