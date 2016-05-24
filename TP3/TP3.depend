@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1464129725 source:c:\repo\tp_laboratorio_1\md_lib\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+
+1464130925 source:c:\repo\tp_laboratorio_1\tp3\main.c
+	"lib.h"
+
+1464133289 c:\repo\tp_laboratorio_1\tp3\lib.h
+	<stdio.h>
+	<stdlib.h>
+	"../md_lib/lib.h"
+
+1464129725 c:\repo\tp_laboratorio_1\md_lib\lib.h
+
+1464132999 source:c:\repo\tp_laboratorio_1\tp3\lib.c
+	"lib.h"
+
