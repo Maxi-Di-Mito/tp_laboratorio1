@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 #include "../md_lib/lib.h"
 typedef struct
 {
@@ -9,6 +11,7 @@ typedef struct
     char descripcion[301];
     int puntaje;
     char linkImagen[201];
+    struct Movie *next;
 }Movie;
 
 /** \brief Maneja la ejecucion de todo el programa
@@ -26,17 +29,35 @@ int run();
  * \return cantidad de Movie cargados
  *
  */
-int cargarPeliculasDesdeArchivoAMemoria(int *espacioReservado,Movie ***lista);
+int cargarPeliculasDesdeArchivoAMemoria(Movie **lista);
 
 
 
 /** \brief Pide el ingreso de los datos, valida y carga la nueva pelicula en memoria
  *
  * \param peliculas
- * \param cantidadDePeliculas
- * \param espacioReservado
  * \return 0 OK , -1 ERROR
  *
  */
-int agregarPelicula(Movie ***peliculas,int *cantidadDePeliculas,int *espacioReservado);
+int agregarPelicula(Movie **peliculas);
+
+
+/** \brief Salva las peliculas en memoria a un archivo binario.
+ *
+ * \param peliculas Movie**: array de pelculas
+ * \param peliculas int cantidad de peliculas.
+ * \return int 0 OK, -1 error
+ *
+ */
+int salvarArchivoBinario(Movie *peliculas);
+
+
+/** \brief Libera la memoria usada;
+ *
+ * \param peliculas Movie**
+ * \param cantidadDePeliculas int
+ * \return void
+ *
+ */
+void liberarMemoria(Movie **peliculas);
 

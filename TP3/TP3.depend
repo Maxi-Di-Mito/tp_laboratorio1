@@ -18,3 +18,24 @@
 1464132999 source:c:\repo\tp_laboratorio_1\tp3\lib.c
 	"lib.h"
 
+1464319225 source:c:\laboratorio\tp_laboratorio_1\md_lib\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+
+1464316158 source:c:\laboratorio\tp_laboratorio_1\tp3\main.c
+	"lib.h"
+
+1464325512 c:\laboratorio\tp_laboratorio_1\tp3\lib.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"../md_lib/lib.h"
+
+1464316158 c:\laboratorio\tp_laboratorio_1\md_lib\lib.h
+
+1464325967 source:c:\laboratorio\tp_laboratorio_1\tp3\lib.c
+	"lib.h"
+
