@@ -61,3 +61,11 @@ int salvarArchivoBinario(Movie *peliculas);
  */
 void liberarMemoria(Movie **peliculas);
 
+
+/** \brief Genera un archivo html con la informacion de las peliculas.
+ *
+ * \param peliculas Movie*
+ * \return int 0 OK, -1 ERROR
+ *
+ */
+int generarWeb(Movie *peliculas);

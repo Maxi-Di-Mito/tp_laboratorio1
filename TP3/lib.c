@@ -35,6 +35,7 @@ int run()
             case MODIFICAR:
                 break;
             case WEB:
+                generarWeb(peliculas);
                 break;
         }
     }while(opcion != SALIR);
@@ -57,19 +58,21 @@ int cargarPeliculasDesdeArchivoAMemoria(Movie **pelis)
     printf("Archivo previo encontrado\nCargando datos....\n");
     for(i = 0;!feof(pArchivo);i++)
     {
-        fread(&aux,sizeof(Movie),1,pArchivo);
-        fseek(pArchivo,sizeof(Movie),SEEK_CUR);
-        if(i == 0)
+        if(fread(&aux,sizeof(Movie),1,pArchivo) == 1)
         {
-            *pelis = malloc(sizeof(Movie));
-            memcpy((*pelis),&aux,sizeof(Movie));
-            (*pelis)->next = NULL;
-            pAux = *pelis;
-        }else
-        {
-            pAux->next = malloc(sizeof(Movie));
-            memcpy((pAux->next),&aux,sizeof(Movie));
-            pAux = pAux->next;
+            if(i == 0)
+            {
+                *pelis = malloc(sizeof(Movie));
+                memcpy((*pelis),&aux,sizeof(Movie));
+                (*pelis)->next = NULL;
+                pAux = *pelis;
+            }else
+            {
+                pAux->next = malloc(sizeof(Movie));
+                memcpy((pAux->next),&aux,sizeof(Movie));
+                pAux = (Movie*)pAux->next;
+            }
+            printf("Titulo Cargado: %s\n",pAux->titulo);
         }
 
     }
@@ -81,7 +84,7 @@ int cargarPeliculasDesdeArchivoAMemoria(Movie **pelis)
 int agregarPelicula(Movie **peliculas)
 {
     Movie auxMovie;
-    Movie *pAuxMovie = NULL;
+    Movie *pAuxMovie = *peliculas;
 
     int error = 0;
     error = pedirString(auxMovie.titulo,"Ingrese el titulo:\n",50,3,"El titulo de tener entre 3 y 50 caracteres\n");
@@ -101,9 +104,11 @@ int agregarPelicula(Movie **peliculas)
     {
         return -1;
     }
+    auxMovie.next = NULL;
 
     if(*peliculas == NULL)
     {
+
         *peliculas = malloc(sizeof(Movie));
         memcpy((*peliculas),&auxMovie,sizeof(Movie));
         (*peliculas)->next = NULL;
@@ -111,10 +116,13 @@ int agregarPelicula(Movie **peliculas)
     }else
     {
         while(pAuxMovie->next != NULL)
-            pAuxMovie = pAuxMovie->next;
-
+        {
+            pAuxMovie = (Movie*)pAuxMovie->next;
+        }
         pAuxMovie->next = malloc(sizeof(Movie));
-        memcpy((pAuxMovie->next),&auxMovie,sizeof(Movie));
+        pAuxMovie = (Movie*)pAuxMovie->next;
+
+        memcpy(pAuxMovie,&auxMovie,sizeof(Movie));
     }
     return 0;
 }
@@ -134,7 +142,7 @@ int salvarArchivoBinario(Movie *peliculas)
         printf("Titulo: %s\n",peliculas->titulo);
         fwrite(peliculas,sizeof(Movie),1,pArchivo);
         printf("GRABADO\n");
-        peliculas = peliculas->next;
+        peliculas = (Movie*)peliculas->next;
         contadorDePelis++;
     }
     fclose(pArchivo);
@@ -147,9 +155,33 @@ int salvarArchivoBinario(Movie *peliculas)
 
 void liberarMemoria(Movie **peliculas)
 {
-    //Movie *pAux = *peliculas->next;
-    //while(*peliculas != NULL)
-    //    free(peliculas);
-    //W}
+    /*Movie *pAux = *peliculas->next;
+    while(*peliculas != NULL)
+    {
+        free(peliculas);
+        *peliculas = paux;
+    }
+*/
+
+}
+
+int generarWeb(Movie *peliculas)
+{
+    FILE *pArchivo = NULL;
+
+    pArchivo = fopen("webGenerada/index.html","w");
+    if(pArchivo == NULL)
+        return -1;
+    fprintf(pArchivo,"<html lang='en'><head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' content='IE=edge'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Lista peliculas</title><link href='css/bootstrap.min.css' rel='stylesheet'><link href='css/custom.css' rel='stylesheet'><!--[if lt IE 9]><script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script><script src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'></script>");
+    fprintf(pArchivo,"<![endif]--></head><body><div class='container'><div class='row'>");
+    while(peliculas != NULL)
+    {
+        fprintf(pArchivo,"<article class='col-md-4 article-intro'><a href='#'><img class='img-responsive img-rounded' src='%s'alt=''></a><h3><a href='#'>%s</a></h3><ul><li>Género:%s</li><li>Puntaje:%d</li><li>Duración:%s</li></ul><p>%s</p></article>",peliculas->linkImagen,peliculas->titulo,peliculas->genero,peliculas->puntaje,peliculas->duracion,peliculas->descripcion);
+        peliculas = (Movie*)peliculas->next;
+    }
+    fprintf(pArchivo,"</div></div><script src='js/jquery-1.11.3.min.js'></script><script src='js/bootstrap.min.js'></script><script src='js/ie10-viewport-bug-workaround.js'></script><script src='js/holder.min.js'></script></body></html>");
+
+    fclose(pArchivo);
+    return 0;
 }
 
