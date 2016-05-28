@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
+#include "slre.h"
 int confirmacion(char* mensaje, char op1, char op2,int cantidadIntentos)
 {
     char c;
@@ -110,8 +110,51 @@ int pedirString(char* dato,char* msg, int max, int min, char*errorMsg)
     {
         hayError = 0;
         printf("%s",msg);
+        fflush(stdin);
+        scanf("%[^\n]",buff);
+        if(strlen(buff) > max)
+        {
+            hayError = 1;
+        }
+        if(!hayError && strlen(buff) < min)
+        {
+            hayError = 1;
+        }
 
-        scanf("%s",buff);
+        if(hayError)
+        {
+            printf("%s",errorMsg);
+            continuar = confirmacionSinReintentos("Desea intentar otra vez?\n",'s','n');
+        }
+    }while(continuar && hayError);
+    if(!hayError)
+    {
+        strcpy(dato,buff);
+        return 0;
+    }
+    return -1;
+}
+
+
+int pedirStringConFormato(char* dato,char* formato,char* msg, int max, int min, char*errorMsg)
+{
+    char buff[4000];
+    struct slre_cap caps[4];
+    short int hayError = 0;
+    short int continuar = 1;
+    do
+    {
+        hayError = 0;
+        printf("%s",msg);
+        fflush(stdin);
+        scanf("%[a-zA-Z0-9 ]",buff);
+
+        if (slre_match(formato,buff, strlen(buff), caps, 4, 0) == SLRE_NO_MATCH)
+        {
+            printf("No cumple el formato\n");
+            hayError = 1;
+        }
+
         if(strlen(buff) > max)
         {
             hayError = 1;

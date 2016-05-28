@@ -31,14 +31,19 @@ int run()
                 printf("archivo binario salvado\n");
                 break;
             case BORRAR:
+                borrarPelicula(&peliculas);
+                salvarArchivoBinario(peliculas);
                 break;
             case MODIFICAR:
+                modificar(peliculas);
+                salvarArchivoBinario(peliculas);
                 break;
             case WEB:
                 generarWeb(peliculas);
                 break;
         }
     }while(opcion != SALIR);
+    salvarArchivoBinario(peliculas);
     liberarMemoria(&peliculas);
     return 0;
 }
@@ -92,7 +97,7 @@ int agregarPelicula(Movie **peliculas)
     if(!error)
         error = pedirString(auxMovie.genero,"Ingrese el genero:\n",50,3,"El genero de tener entre 3 y 50 caracteres\n");
     if(!error)
-        error = pedirString(auxMovie.duracion,"Ingrese la duracion(hh:mm):\n",50,3,"la duracion debe tener 5 caracteres\n");
+        error = pedirString(auxMovie.duracion,"Ingrese la duracion(hh:mm):\n",5,5,"la duracion debe tener 5 caracteres\n");
     if(!error)
         error = pedirString(auxMovie.descripcion,"Ingrese la descripcion:\n",300,3,"la descripcion debe tener entre 3 y 300 caracteres\n");
     if(!error)
@@ -139,9 +144,7 @@ int salvarArchivoBinario(Movie *peliculas)
 
     while(peliculas != NULL)
     {
-        printf("Titulo: %s\n",peliculas->titulo);
         fwrite(peliculas,sizeof(Movie),1,pArchivo);
-        printf("GRABADO\n");
         peliculas = (Movie*)peliculas->next;
         contadorDePelis++;
     }
@@ -185,3 +188,97 @@ int generarWeb(Movie *peliculas)
     return 0;
 }
 
+int borrarPelicula(Movie **peliculas)
+{
+    char tituloAEliminar[51];
+    Movie *auxMovie = *peliculas;
+    Movie *auxDelete = NULL;
+    while(auxMovie != NULL)
+    {
+        printf("TITULO: %s\n",auxMovie->titulo);
+        auxMovie = (Movie*)auxMovie->next;
+    }
+    if(pedirString(tituloAEliminar,"Ingrese el titulo que desea eliminar\n",50,3,"El titulo debe tener entre 50 y 3 caracteres\n") == -1)
+    {
+        return -1;
+    }
+    auxMovie = *peliculas;
+    if(!strcmp((*peliculas)->titulo,tituloAEliminar))
+    {
+        *peliculas = (Movie*)(*peliculas)->next;
+        free(auxMovie);
+    }else
+    {
+        while(auxMovie!= NULL)
+        {
+            auxDelete = (Movie*)auxMovie->next;
+            if(!strcmp(  auxDelete->titulo  ,tituloAEliminar))
+            {
+                break;
+            }
+        }
+        if(auxDelete == NULL)
+        {
+            printf("No se encontro la pelicula\n");
+            return -1;
+        }
+        auxMovie->next = auxDelete->next;
+        free(auxDelete);
+
+    }
+
+    return 0;
+}
+
+
+int modificar(Movie *peliculas)
+{
+    char tituloAModificar[51];
+    Movie auxMovie;
+    Movie *pAuxMovie = peliculas;
+    while(pAuxMovie != NULL)
+    {
+        printf("TITULO: %s\n",pAuxMovie->titulo);
+        pAuxMovie = (Movie*)pAuxMovie->next;
+    }
+    if(pedirString(tituloAModificar,"Ingrese el titulo a modificar\n",50,3,"El titulo de tener entre 3 y 50 caracteres\n") == -1)
+    {
+        return -1;
+    }
+    pAuxMovie = peliculas;
+    while(pAuxMovie != NULL)
+    {
+        if(!strcmp(pAuxMovie->titulo,tituloAModificar))
+        {
+            break;
+        }
+        pAuxMovie = (Movie*)pAuxMovie->next;
+    }
+    if(pAuxMovie == NULL)
+    {
+        printf("No se encontro la pelicular\n");
+        return -1;
+    }
+
+    int error = 0;
+    error = pedirString(auxMovie.titulo,"Ingrese el titulo:\n",50,3,"El titulo de tener entre 3 y 50 caracteres\n");
+
+    if(!error)
+        error = pedirString(auxMovie.genero,"Ingrese el genero:\n",50,3,"El genero de tener entre 3 y 50 caracteres\n");
+    if(!error)
+        error = pedirString(auxMovie.duracion,"Ingrese la duracion(hh:mm):\n",5,5,"la duracion debe tener 5 caracteres\n");
+    if(!error)
+        error = pedirString(auxMovie.descripcion,"Ingrese la descripcion:\n",300,3,"la descripcion debe tener entre 3 y 300 caracteres\n");
+    if(!error)
+        error = pedirInt(&auxMovie.puntaje,"Ingrese el puntaje:\n",10,1,"ingrese un puntaje valido");
+    if(!error)
+        error = pedirString(auxMovie.linkImagen,"Ingrese el link a la imagen:\n",200,1,"ingrese la direccion debe tener al menos 1 caracter valido");
+
+    if(error)
+    {
+        return -1;
+    }
+    auxMovie.next = pAuxMovie->next;
+    memcpy(pAuxMovie,&auxMovie,sizeof(Movie));
+    return 0;
+}

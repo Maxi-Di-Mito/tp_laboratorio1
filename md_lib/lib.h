@@ -66,6 +66,21 @@ int pedirLong(long *dato,char* msg, int max, int min, char* errorMsg);
  */
  int pedirString(char* dato,char* msg, int max, int min, char*errorMsg);
 
+
+
+
+ /** \brief Pide el ingreso de un dato de tipo String con formato que responsa a una regex usando una libreria externa y valida.Muestra un mensaje de prompt y un munsaje en caso de error. Ofrece posibilidad de reintentar
+ *  LIB de regex -> https://github.com/cesanta/slre
+ * \param dato char* puntero a donde guardar el dato
+ * \param char* formato
+ * \param msg char* mensaje
+ * \param max int maximo cantidad de caracteres
+ * \param min int minimo cantidad de caracteres
+ * \param errorMsg char* mesaje de error
+ * \return long 0 si se pude obtener el dato, -1 en caso de error
+ *
+ */int pedirStringConFormato(char* dato,char* formato,char* msg, int max, int min, char*errorMsg);
+
  /** \brief Pide el ingreso de un dato de tipo float y valida.Muestra un mensaje de prompt y un munsaje en caso de error. Ofrece posibilidad de reintentar
  *
  * \param dato long* puntero a donde guardar el dato

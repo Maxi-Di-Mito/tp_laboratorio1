@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "../md_lib/lib.h"
+
 typedef struct
 {
     char titulo[51];
@@ -69,3 +70,25 @@ void liberarMemoria(Movie **peliculas);
  *
  */
 int generarWeb(Movie *peliculas);
+
+
+
+/** \brief Lista las peliculas y permite eliminar una
+ *
+ * \param peliculas Movie**
+ * \return int 0 OK, -1 ERROR
+ *
+ */
+int borrarPelicula(Movie **peliculas);
+
+
+
+
+
+/** \brief Lsita las peliculas y permite modificar los datos de una
+ *
+ * \param peliculas Movie*
+ * \return int 0 OK, -1 ERROR
+ *
+ */
+int modificar(Movie *peliculas);
