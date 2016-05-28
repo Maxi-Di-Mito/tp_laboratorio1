@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../md_lib/lib.h" />
+		<Unit filename="../md_lib/slre.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../md_lib/slre.h" />
 		<Unit filename="lib.c">
 			<Option compilerVar="CC" />
 		</Unit>
