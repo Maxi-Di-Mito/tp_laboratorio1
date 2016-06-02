@@ -97,14 +97,10 @@ int al_add(ArrayList* pList,void* pElement)
  */
 int al_deleteArrayList(ArrayList* pList)
 {
-    int i = 0;
     if(pList == NULL)
         return -1;
 
-    for(i=0;i<pList->size;i++)
-    {
-        free(pList->pElements[i]);// HAY QUE HACER ESTO???
-    }
+    free(pList->pElements);
     free(pList);
     if(pList->size > 0)
         return 0;
@@ -175,10 +171,10 @@ int al_contains(ArrayList* pList, void* pElement)
  */
 int al_set(ArrayList* pList, int index,void* pElement)
 {
-    if(pList == NULL || pElement == NULL)
-        return -1;
-    if(index < 0 || index >= pList->size)
-        return -1;
+    if(pList == NULL)return -1;
+    if(pElement == NULL)return -1;
+    if(index < 0)return -1;
+    if(index >= pList->size)return -1;
 
     pList->pElements[index] = pElement;
 
@@ -194,17 +190,15 @@ int al_set(ArrayList* pList, int index,void* pElement)
  */
 int al_remove(ArrayList* pList,int index)
 {
-    printf("REMOVE INIT:\nSIZE: %d, index: %d\n",pList->size,index);
     if(pList == NULL)return -1;
     if(index < 0 )return -1;
     if(index >= pList->size)return -1;
 
-    free(pList->pElements[index]);
+   pList->pElements[index] = NULL;// HAY QUE HACER ESTO?
 
     contract(pList,index);
 
     pList->size = pList->size - 1;
-    printf("REMOVE FINAL:\nSIZE: %d\n",pList->size);
     return 0;
 }
 
@@ -217,9 +211,14 @@ int al_remove(ArrayList* pList,int index)
  */
 int al_clear(ArrayList* pList)
 {
-    int returnAux = -1;
-
-    return returnAux;
+    int i;
+    if(pList == NULL)return -1;
+    for(i=0;i< pList->size;i++)
+    {
+        pList->pElements[i] = NULL;// HAY QUE HACER ESTO?
+    }
+    pList->size = 0;
+    return 0;
 }
 
 
@@ -231,9 +230,19 @@ int al_clear(ArrayList* pList)
  */
 ArrayList* al_clone(ArrayList* pList)
 {
-    ArrayList* returnAux = NULL;
+    ArrayList * aux;
+    if(pList == NULL)return NULL;
 
-    return returnAux;
+    aux = al_newArrayList();
+    if(aux == NULL)return NULL;
+
+    aux->size = pList->size;
+    aux->reservedSize = pList->reservedSize;
+    aux->pElements = realloc(aux->pElements,pList->reservedSize * sizeof(void*));
+    if(aux->pElements == NULL)return NULL;
+    memcpy( aux->pElements , pList->pElements , pList->reservedSize * sizeof(void*));
+
+    return aux;
 }
 
 
@@ -248,9 +257,15 @@ ArrayList* al_clone(ArrayList* pList)
  */
 int al_push(ArrayList* pList, int index, void* pElement)
 {
-    int returnAux = -1;
+    if(pList == NULL)return -1;
+    if(pElement == NULL)return -1;
+    if(index < 0 )return -1;
+    if(index >= pList->size)return -1;
 
-    return returnAux;
+    expand(pList,index);
+    pList->pElements[index] = pElement;
+
+    return 0;
 }
 
 
@@ -365,9 +380,29 @@ int resizeUp(ArrayList* pList)
  */
 int expand(ArrayList* pList,int index)
 {
-    int returnAux = -1;
+    int i,newSpace;
+    void **auxPElements=NULL;
+    if(pList == NULL)return -1;
+    if(index < 0 )return -1;
+    if(index >= pList->size)return -1;
 
-    return returnAux;
+    if(pList->size == pList->reservedSize)
+    {
+        newSpace = (10+ pList->reservedSize) * sizeof(void*);
+        auxPElements = realloc(pList->pElements,newSpace);
+        if(auxPElements == NULL)
+            return -1;
+        pList->reservedSize = pList->reservedSize + 10;
+        pList->pElements = auxPElements;
+    }
+
+    for(i = pList->size; i > 0;i--)
+    {
+        printf("PASANDO PA ATRAS\n");
+        pList->pElements[i] = pList->pElements[i-1];
+    }
+    pList->size++;
+    return 0;
 }
 
 /** \brief  Contract an array list

@@ -72,7 +72,6 @@ void eighthTestCase02(void)
     int i, r;
     ArrayList* list;
     Employee* pAux[LENGTH];
-
     list = al_newArrayList();
 
     for(i=0; i < LENGTH; i++)
@@ -89,7 +88,7 @@ void eighthTestCase02(void)
     utest_assertEqualsIntMsg(list->size,0,"Error in the size of the array, after remove all the elements the correct value is 0");
 
     free(list);
-    for(i=0; i < LENGTH; i++)
+    for(i=0; i < LENGTH; i++);
         free(pAux[i]);
 }
 

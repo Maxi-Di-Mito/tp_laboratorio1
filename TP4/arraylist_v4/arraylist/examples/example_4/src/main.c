@@ -53,10 +53,10 @@ int main(void)
         //startTesting(5);
         //startTesting(6);
         //startTesting(7);
-        startTesting(8);
+        //startTesting(8);
         //startTesting(9);
         //startTesting(10);
-        //startTesting(11);
+        startTesting(11);
         //startTesting(12);
         //startTesting(13);
         //startTesting(14);
