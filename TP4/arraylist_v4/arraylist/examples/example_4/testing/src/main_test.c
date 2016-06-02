@@ -129,9 +129,13 @@ void startTesting(int testGroup)
             utest_printStartTesting("al_remove()");
             utest_init();
             utest_startTest(eighthTestCase01,eighthTestSetup,">Case[Return of remove a correct Element]");
+            printf("TERMINO PRIMERA PRUEBA\n");
             utest_startTest(eighthTestCase02,eighthTestSetup,">Case[Value of the size of the array after remove an element]");
+            printf("TERMINO SEGUNDA PRUEBA\n");
             utest_startTest(eighthTestCase03,eighthTestSetup,">Case[Return of remove with invalid index]");
+            printf("TERMINO TERCERA PRUEBA\n");
             utest_startTest(eighthTestCase04,eighthTestSetup,">Case[Return of remove with NULL pointer to array]");
+            printf("TERMINO CUARTA PRUEBA\n");
             utest_printStatistics("al_remove()");
             // End Group 08
             break;

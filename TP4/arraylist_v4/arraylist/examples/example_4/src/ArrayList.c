@@ -69,9 +69,25 @@ ArrayList* al_newArrayList(void)
  */
 int al_add(ArrayList* pList,void* pElement)
 {
-    int returnAux = -1;
+    void **auxPElements = NULL;
+    int newSpace = 0;
+    if(pList == NULL || pElement == NULL)
+        return -1;
 
-    return returnAux;
+    if(pList->size == pList->reservedSize)
+    {
+        newSpace = (10+ pList->reservedSize) * sizeof(void*);
+
+        auxPElements = realloc(pList->pElements,newSpace);
+        if(auxPElements == NULL)
+            return -1;
+        pList->reservedSize = pList->reservedSize + 10;
+        pList->pElements = auxPElements;
+    }
+
+    pList->pElements[pList->size] = pElement;
+    pList->size = pList->size +1;
+    return 0;
 }
 
 /** \brief  Delete arrayList
@@ -81,9 +97,19 @@ int al_add(ArrayList* pList,void* pElement)
  */
 int al_deleteArrayList(ArrayList* pList)
 {
-    int returnAux = -1;
+    int i = 0;
+    if(pList == NULL)
+        return -1;
 
-    return returnAux;
+    for(i=0;i<pList->size;i++)
+    {
+        free(pList->pElements[i]);// HAY QUE HACER ESTO???
+    }
+    free(pList);
+    if(pList->size > 0)
+        return 0;
+    else
+        return 1;
 }
 
 /** \brief  Delete arrayList
@@ -93,9 +119,11 @@ int al_deleteArrayList(ArrayList* pList)
  */
 int al_len(ArrayList* pList)
 {
-    int returnAux = -1;
-
-    return returnAux;
+    if(pList == NULL)
+    {
+        return -1;
+    }
+    return pList->size;
 }
 
 
@@ -107,9 +135,10 @@ int al_len(ArrayList* pList)
  */
 void* al_get(ArrayList* pList , int index)
 {
-    void* returnAux = NULL;
+    if(pList == NULL || index < 0 || index >= pList->size )
+        return NULL;
 
-    return returnAux;
+    return pList->pElements[index];
 }
 
 
@@ -123,9 +152,16 @@ void* al_get(ArrayList* pList , int index)
  */
 int al_contains(ArrayList* pList, void* pElement)
 {
-    int returnAux = -1;
+    int i;
+    if(pList == NULL || pElement == NULL)
+        return -1;
 
-    return returnAux;
+    for(i=0;i< pList->size;i++)
+    {
+        if(pList->pElements[i] == pElement)
+            return 1;
+    }
+    return 0;
 }
 
 
@@ -139,9 +175,14 @@ int al_contains(ArrayList* pList, void* pElement)
  */
 int al_set(ArrayList* pList, int index,void* pElement)
 {
-    int returnAux = -1;
+    if(pList == NULL || pElement == NULL)
+        return -1;
+    if(index < 0 || index >= pList->size)
+        return -1;
 
-    return returnAux;
+    pList->pElements[index] = pElement;
+
+    return 0;
 }
 
 
@@ -153,9 +194,18 @@ int al_set(ArrayList* pList, int index,void* pElement)
  */
 int al_remove(ArrayList* pList,int index)
 {
-    int returnAux = -1;
+    printf("REMOVE INIT:\nSIZE: %d, index: %d\n",pList->size,index);
+    if(pList == NULL)return -1;
+    if(index < 0 )return -1;
+    if(index >= pList->size)return -1;
 
-    return returnAux;
+    free(pList->pElements[index]);
+
+    contract(pList,index);
+
+    pList->size = pList->size - 1;
+    printf("REMOVE FINAL:\nSIZE: %d\n",pList->size);
+    return 0;
 }
 
 
@@ -328,7 +378,16 @@ int expand(ArrayList* pList,int index)
  */
 int contract(ArrayList* pList,int index)
 {
-    int returnAux = -1;
+    int i;
+    if(pList == NULL)
+        return -1;
+    if(index < 0 || index >= pList->size)
+        return -1;
 
-    return returnAux;
+    for(i = index; i < (pList->size-1) ;i++)
+    {
+        pList->pElements[i] = pList->pElements[i+1];
+    }
+
+    return 0;
 }
