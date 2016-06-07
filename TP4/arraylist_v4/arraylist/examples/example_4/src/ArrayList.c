@@ -131,8 +131,9 @@ int al_len(ArrayList* pList)
  */
 void* al_get(ArrayList* pList , int index)
 {
-    if(pList == NULL || index < 0 || index >= pList->size )
-        return NULL;
+    if(pList == NULL)return NULL;
+    if(index < 0 )return NULL;
+    if(index >= pList->size)return NULL;
 
     return pList->pElements[index];
 }
@@ -171,10 +172,13 @@ int al_contains(ArrayList* pList, void* pElement)
  */
 int al_set(ArrayList* pList, int index,void* pElement)
 {
-    if(pList == NULL)return -1;
-    if(pElement == NULL)return -1;
-    if(index < 0)return -1;
-    if(index >= pList->size)return -1;
+    if(pList == NULL){return -1;}
+    if(pElement == NULL){return -1;}
+    if(index < 0){return -1;}
+    if(index >= pList->size){return -1;}
+    /*ESTA MAL porque el indice inicial es 0
+    entonces is meto 5 elementos tengo los indices 0,1,2,3,4 y no
+    5 que es lo que intenta setear el test*/
 
     pList->pElements[index] = pElement;
 
@@ -260,9 +264,9 @@ int al_push(ArrayList* pList, int index, void* pElement)
     if(pList == NULL)return -1;
     if(pElement == NULL)return -1;
     if(index < 0 )return -1;
-    if(index >= pList->size)return -1;
-
+    if(index > pList->size)return -1;
     expand(pList,index);
+
     pList->pElements[index] = pElement;
 
     return 0;
@@ -384,7 +388,7 @@ int expand(ArrayList* pList,int index)
     void **auxPElements=NULL;
     if(pList == NULL)return -1;
     if(index < 0 )return -1;
-    if(index >= pList->size)return -1;
+    if(index > pList->size)return -1;
 
     if(pList->size == pList->reservedSize)
     {
@@ -398,7 +402,6 @@ int expand(ArrayList* pList,int index)
 
     for(i = pList->size; i > 0;i--)
     {
-        printf("PASANDO PA ATRAS\n");
         pList->pElements[i] = pList->pElements[i-1];
     }
     pList->size++;
