@@ -5,6 +5,7 @@
 
 // funciones privadas
 int resizeUp(ArrayList* pList);
+int resizeDown(ArrayList* pList);
 int expand(ArrayList* pList,int index);
 int contract(ArrayList* pList,int index);
 
@@ -191,7 +192,7 @@ int al_remove(ArrayList* pList,int index)
     pList->pElements[index] = NULL;// HAY QUE HACER ESTO?
 
     contract(pList,index);
-
+    resizeDown(pList);
     pList->size = pList->size - 1;
     return 0;
 }
@@ -212,6 +213,7 @@ int al_clear(ArrayList* pList)
         pList->pElements[i] = NULL;// HAY QUE HACER ESTO?
     }
     pList->size = 0;
+    resizeDown(pList);
     return 0;
 }
 
@@ -313,6 +315,7 @@ void* al_pop(ArrayList* pList,int index)
 
     aux = pList->get(pList,index);
     pList->remove(pList,index);
+    resizeDown(pList);
     return aux;
 }
 
@@ -395,6 +398,23 @@ int al_sort(ArrayList* pList, int (*pFunc)(void* ,void*), int order)
     return 0;
 }
 
+
+
+int resizeDown(ArrayList* pList)
+{
+    int newSpace;
+    void **auxPElements=NULL;
+    if(pList->reservedSize - pList->size > 10)
+    {
+        newSpace = (pList->reservedSize - 10) * sizeof(void*);
+        auxPElements = realloc(pList->pElements,newSpace);
+        if(auxPElements == NULL)
+            return -1;
+        pList->reservedSize = pList->reservedSize -10 10;
+        pList->pElements = auxPElements;
+    }
+    return 0;
+}
 
 /** \brief Increment the number of elements in pList in AL_INCREMENT elements.
  * \param pList ArrayList* Pointer to arrayList

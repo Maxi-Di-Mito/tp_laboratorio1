@@ -56,7 +56,7 @@ int main(void)
         startTesting(8);
         startTesting(9);
         startTesting(10);
-        startTesting(11);// ESTA MAL EL TEST
+        startTesting(11);
         startTesting(12);
         startTesting(13);
         startTesting(14);
