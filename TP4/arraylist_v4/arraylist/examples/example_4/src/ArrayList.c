@@ -8,6 +8,9 @@ int resizeUp(ArrayList* pList);
 int expand(ArrayList* pList,int index);
 int contract(ArrayList* pList,int index);
 
+void swap(void *vp1,void *vp2,int size);
+void ordenar(void **lista,int size, int (*pFunc)(void* ,void*),char order);
+
 #define AL_INCREMENT      10
 #define AL_INITIAL_VALUE  10
 //___________________
@@ -69,21 +72,11 @@ ArrayList* al_newArrayList(void)
  */
 int al_add(ArrayList* pList,void* pElement)
 {
-    void **auxPElements = NULL;
-    int newSpace = 0;
     if(pList == NULL || pElement == NULL)
         return -1;
 
-    if(pList->size == pList->reservedSize)
-    {
-        newSpace = (10+ pList->reservedSize) * sizeof(void*);
-
-        auxPElements = realloc(pList->pElements,newSpace);
-        if(auxPElements == NULL)
-            return -1;
-        pList->reservedSize = pList->reservedSize + 10;
-        pList->pElements = auxPElements;
-    }
+    if(resizeUp(pList))
+        return -1;
 
     pList->pElements[pList->size] = pElement;
     pList->size = pList->size +1;
@@ -176,9 +169,6 @@ int al_set(ArrayList* pList, int index,void* pElement)
     if(pElement == NULL){return -1;}
     if(index < 0){return -1;}
     if(index >= pList->size){return -1;}
-    /*ESTA MAL porque el indice inicial es 0
-    entonces is meto 5 elementos tengo los indices 0,1,2,3,4 y no
-    5 que es lo que intenta setear el test*/
 
     pList->pElements[index] = pElement;
 
@@ -267,7 +257,7 @@ int al_push(ArrayList* pList, int index, void* pElement)
     if(index > pList->size)return -1;
     expand(pList,index);
 
-    pList->pElements[index] = pElement;
+    pList->set(pList,index,pElement);
 
     return 0;
 }
@@ -337,9 +327,22 @@ void* al_pop(ArrayList* pList,int index)
  */
 ArrayList* al_subList(ArrayList* pList,int from,int to)
 {
-    void* returnAux = NULL;
+    ArrayList *aux = NULL;
+    int i = 0;
+    if(pList == NULL)return NULL;
+    if(from > to)return NULL;
+    if(to > pList->size)return NULL;
+    if(from < 0)return NULL;
 
-    return returnAux ;
+    aux = al_newArrayList();
+    if( aux == NULL)return NULL;
+
+    for(i = from; i <= to;i++)
+    {
+        aux->add(aux,pList->get(pList,i));
+    }
+
+    return aux;
 }
 
 
@@ -354,9 +357,24 @@ ArrayList* al_subList(ArrayList* pList,int from,int to)
  */
 int al_containsAll(ArrayList* pList,ArrayList* pList2)
 {
-    int returnAux = -1;
+    int i,j;
+    int contadorDeIguales = 0;
+    if(pList == NULL)return -1;
+    if(pList2 == NULL)return -1;
 
-    return returnAux;
+    for(i = 0; i < pList2->size;i++)
+    {
+        for(j=0;j< pList->size;j++)
+        {
+            if(al_get(pList,j) == al_get(pList2,i))
+            {
+                contadorDeIguales++;
+                break;
+            }
+        }
+    }
+
+    return (contadorDeIguales == pList2->size);
 }
 
 /** \brief Sorts objects of list, use compare pFunc
@@ -368,9 +386,13 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2)
  */
 int al_sort(ArrayList* pList, int (*pFunc)(void* ,void*), int order)
 {
-    int returnAux = -1;
+    if(pList == NULL)return -1;
+    if(pFunc == NULL)return -1;
+    if(order != 1 && order != 0)return -1;
 
-    return returnAux;
+    ordenar(pList->pElements,pList->size,pFunc,order?'a':'d');
+
+    return 0;
 }
 
 
@@ -381,10 +403,18 @@ int al_sort(ArrayList* pList, int (*pFunc)(void* ,void*), int order)
  */
 int resizeUp(ArrayList* pList)
 {
-    int returnAux = -1;
-
-    return returnAux;
-
+    int newSpace;
+    void **auxPElements=NULL;
+    if(pList->size == pList->reservedSize)
+    {
+        newSpace = (10+ pList->reservedSize) * sizeof(void*);
+        auxPElements = realloc(pList->pElements,newSpace);
+        if(auxPElements == NULL)
+            return -1;
+        pList->reservedSize = pList->reservedSize + 10;
+        pList->pElements = auxPElements;
+    }
+    return 0;
 }
 
 /** \brief  Expand an array list
@@ -395,23 +425,15 @@ int resizeUp(ArrayList* pList)
  */
 int expand(ArrayList* pList,int index)
 {
-    int i,newSpace;
-    void **auxPElements=NULL;
+    int i;
     if(pList == NULL)return -1;
     if(index < 0 )return -1;
     if(index > pList->size)return -1;
 
-    if(pList->size == pList->reservedSize)
-    {
-        newSpace = (10+ pList->reservedSize) * sizeof(void*);
-        auxPElements = realloc(pList->pElements,newSpace);
-        if(auxPElements == NULL)
-            return -1;
-        pList->reservedSize = pList->reservedSize + 10;
-        pList->pElements = auxPElements;
-    }
+    if(resizeUp(pList))
+        return -1;
 
-    for(i = pList->size; i > 0;i--)
+    for(i = pList->size; i >= index;i--)
     {
         pList->pElements[i] = pList->pElements[i-1];
     }
@@ -440,3 +462,45 @@ int contract(ArrayList* pList,int index)
 
     return 0;
 }
+void swap(void *vp1,void *vp2,int size)
+{
+  void *buf = malloc(size);
+  memcpy(buf,vp1,size);
+  memcpy(vp1,vp2,size);
+  memcpy(vp2,buf,size);  //memcpy ->inbuilt function in std-c
+}
+
+// COPIADO DE MI MD_LIB
+void ordenar(void **lista, int size, int (*cmp)(void* ,void*),char order)
+{
+    int i,j;
+    void* auxSwap;
+    for(i=0;i<size-1;i++)
+    {
+        for(j=i+1;j<size;j++)
+        {
+            if( order == 'a')
+            {
+                if(cmp(lista[i],lista[j]) > 0)
+                {
+                    auxSwap = lista[i];
+                    lista[i] = lista[j];
+                    lista[j] = auxSwap;
+                }
+            }
+            if(order == 'd')
+            {
+                if(cmp(lista[i],lista[j]) < 0)
+                {
+                    auxSwap = lista[i];
+                    lista[i] = lista[j];
+                    lista[j] = auxSwap;
+                }
+            }
+        }
+    }
+}
+
+
+
+
