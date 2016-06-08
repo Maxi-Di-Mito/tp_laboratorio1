@@ -410,7 +410,7 @@ int resizeDown(ArrayList* pList)
         auxPElements = realloc(pList->pElements,newSpace);
         if(auxPElements == NULL)
             return -1;
-        pList->reservedSize = pList->reservedSize -10 10;
+        pList->reservedSize = pList->reservedSize -10 ;
         pList->pElements = auxPElements;
     }
     return 0;
