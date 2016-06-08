@@ -103,5 +103,5 @@ int pedirFloat(float *dato, char* mensaje , char* errorMensaje);
  *
  * \return void
  */
-void ordenar(void *lista, int dataSize,int size, int (*cmp)(),char order);
+void ordenar(void **lista, int size, int (*cmp)(void* ,void*),char order);
 

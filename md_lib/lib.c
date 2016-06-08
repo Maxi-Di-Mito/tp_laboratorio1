@@ -212,10 +212,7 @@ int pedirFloat(float *dato, char* mensaje , char* errorMensaje)
     return -1;
 }
 
-
-
-
-void ordenar(void *lista, int dataSize,int size, int (*cmp)(),char order)
+void ordenar(void **lista, int size, int (*cmp)(void* ,void*),char order)
 {
     int i,j;
     for(i=0;i<size-1;i++)
@@ -224,16 +221,20 @@ void ordenar(void *lista, int dataSize,int size, int (*cmp)(),char order)
         {
             if( order == 'a')
             {
-                if(cmp(lista+(i*dataSize),lista+(j*dataSize)) > 0)
+                if(cmp(lista[i],lista[j]) > 0)
                 {
-                    swap(lista+(i*dataSize),lista+(j*dataSize),dataSize);
+                    auxSwap = lista[i];
+                    lista[i] = lista[j];
+                    lista[j] = auxSwap;
                 }
             }
             if(order == 'd')
             {
-                if(cmp(lista+(i*dataSize),lista+(j*dataSize)) < 0)
+                if(cmp(lista[i],lista[j]) < 0)
                 {
-                    swap(lista+(i*dataSize),lista+(j*dataSize),dataSize);
+                    auxSwap = lista[i];
+                    lista[i] = lista[j];
+                    lista[j] = auxSwap;
                 }
             }
         }
