@@ -362,9 +362,9 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2)
     if(pList == NULL)return -1;
     if(pList2 == NULL)return -1;
 
-    for(i = 0; i < pList2->size;i++)
+    for(i = 0; i < pList->size;i++)
     {
-        for(j=0;j< pList->size;j++)
+        for(j=0;j< pList2->size;j++)
         {
             if(al_get(pList,j) == al_get(pList2,i))
             {
