@@ -56,10 +56,10 @@ int main(void)
         //startTesting(8);
         //startTesting(9);
         //startTesting(10);
-        startTesting(11);
+        //startTesting(11);// PREGUNTAR
         //startTesting(12);
         //startTesting(13);
-        //startTesting(14);
+        startTesting(14);
         //startTesting(15);
         //startTesting(16);
         //startTesting(17);

@@ -198,7 +198,7 @@ int al_remove(ArrayList* pList,int index)
     if(index < 0 )return -1;
     if(index >= pList->size)return -1;
 
-   pList->pElements[index] = NULL;// HAY QUE HACER ESTO?
+    pList->pElements[index] = NULL;// HAY QUE HACER ESTO?
 
     contract(pList,index);
 
@@ -281,9 +281,16 @@ int al_push(ArrayList* pList, int index, void* pElement)
  */
 int al_indexOf(ArrayList* pList, void* pElement)
 {
-    int returnAux = -1;
+    int index = 0;
+    if(pList == NULL)return -1;
+    if(pElement == NULL)return -1;
 
-    return returnAux;
+    for(index = 0;index < pList->size;index++)
+    {
+        if(pList->get(pList,index) == pElement)
+            return index;
+    }
+    return -1;
 }
 
 
@@ -294,9 +301,8 @@ int al_indexOf(ArrayList* pList, void* pElement)
  */
 int al_isEmpty(ArrayList* pList)
 {
-    int returnAux = -1;
-
-    return returnAux;
+    if(pList == NULL)return -1;
+    return !(pList->size > 0);
 }
 
 
@@ -310,9 +316,14 @@ int al_isEmpty(ArrayList* pList)
  */
 void* al_pop(ArrayList* pList,int index)
 {
-    void* returnAux = NULL;
+    void* aux = NULL;
+    if(pList == NULL)return NULL;
+    if(index < 0 )return NULL;
+    if(index >= pList->size)return NULL;
 
-    return returnAux;
+    aux = pList->get(pList,index);
+    pList->remove(pList,index);
+    return aux;
 }
 
 
