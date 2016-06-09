@@ -257,7 +257,8 @@ int al_push(ArrayList* pList, int index, void* pElement)
     if(pElement == NULL)return -1;
     if(index < 0 )return -1;
     if(index > pList->size)return -1;
-    expand(pList,index);
+    if(expand(pList,index))
+       return -1;
 
     pList->set(pList,index,pElement);
 
@@ -296,8 +297,6 @@ int al_isEmpty(ArrayList* pList)
     if(pList == NULL)return -1;
     return !(pList->size > 0);
 }
-
-
 
 
 /** \brief Remove the item at the given position in the list, and return it.
@@ -347,8 +346,6 @@ ArrayList* al_subList(ArrayList* pList,int from,int to)
 
     return aux;
 }
-
-
 
 
 
