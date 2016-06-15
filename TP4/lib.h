@@ -212,3 +212,26 @@ ArrayList *calcularRango(ArrayList *calendario,char fechaInicio[9],char fechaFin
  *
  */
 int imprimirEventos(ArrayList *calendario);
+
+
+
+
+
+/** \brief Remueve los elementos del calendario que no correspondan con el anio de la fecha indicada
+ *
+ * \param auxCalendario ArrayList*
+ * \param anio[9] char
+ * \return int
+ *
+ */
+int filtrarCalendarioPorAnio(ArrayList *auxCalendario,char anio[9]);
+
+
+/** \brief Compara dos eventos por el anio
+ *
+ * \param e1 Evento*
+ * \param e2 Evento*
+ * \return int
+ *
+ */
+int compararEventoPorAnio(Evento *e1,Evento *e2);

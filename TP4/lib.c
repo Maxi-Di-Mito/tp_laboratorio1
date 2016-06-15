@@ -7,6 +7,7 @@
 #define LIMPIAR 6
 #define SALIR 7
 
+
 int start()
 {
     int opcion = 0;
@@ -88,7 +89,13 @@ int crearNuevoEvento(ArrayList *calendario)
     {
         nuevoEvento = malloc(sizeof(Evento));
         memcpy(nuevoEvento,&auxEvento,sizeof(Evento));
-        estado = calendario->add(calendario,nuevoEvento);
+        if(calendario->len(calendario) == 0)
+        {
+            estado = calendario->add(calendario,nuevoEvento);
+        }else
+        {
+            estado = calendario->push(calendario,0,nuevoEvento);
+        }
     }
 
     return estado;
@@ -173,7 +180,8 @@ int eliminarEvento(ArrayList *calendario)
 
 int exportarCalendario(ArrayList *calendario)
 {
-    int opcion,estado,idInicio,idFinal;
+    int opcion,estado;
+    char anio[9] = "00000000\0";
     ArrayList *auxCalendario = NULL;
     char fechaInicio[9];
     char fechaFinal[9];
@@ -188,7 +196,7 @@ int exportarCalendario(ArrayList *calendario)
 
     printf("1-Exportar todo\n");
     printf("2-Exportar rango de fecha\n");
-    printf("3-Exportar rango de ID de eventos\n");
+    printf("3-Exportar anio especifico\n");
     if(pedirInt(&opcion,"",3,1,"Ingrese una opcion valida\n"))
        return -1;
 
@@ -209,14 +217,18 @@ int exportarCalendario(ArrayList *calendario)
         return estado;
     }else
     {
-        imprimirEventos(calendario);
-        estado = pedirInt(&idInicio,"Ingrese el id inicial\n",0,0,"Ingrese un id valido\n");
-        if(!estado)
-            estado = pedirInt(&idFinal,"Ingrese el id final\n",0,0,"Ingrese un id valido\n");
+        estado = pedirString(anio,"Ingrese el anio\n",4,4,"Ingrese un anio valido\n");
+        strcat(anio,"0000");
+        estado = validarFormatoFecha(anio);
+
+
         if(!estado)
         {
-            auxCalendario = calendario->subList(calendario,idInicio,idFinal);
-            estado = exportarEventosAArchivo(auxCalendario);
+            auxCalendario = calendario->clone(calendario);
+            estado = filtrarCalendarioPorAnio(auxCalendario,anio);
+
+            if(!estado)
+                estado = exportarEventosAArchivo(auxCalendario);
             auxCalendario->deleteArrayList(auxCalendario);
         }
         return estado;
@@ -430,4 +442,45 @@ int imprimirEventos(ArrayList *calendario)
     return 0;
 }
 
+int filtrarCalendarioPorAnio(ArrayList *auxCalendario,char anio[9])
+{
+    int i;
+    Evento auxEvento;
+    strcpy(auxEvento.fechaCreacion,anio);
+    Evento *a = auxCalendario->get(0);
+    printf("GET 0 : %s\n",a->fechaCreacion);
 
+    for(i=0; i < auxCalendario->len(auxCalendario);i++)
+    {
+        if(compararEventoPorAnio(auxCalendario->get(i),&auxEvento) != 0)
+        {
+            auxCalendario->remove(i);
+            i--;
+        }
+    }
+    return 0;
+}
+
+
+int compararEventoPorAnio(Evento *e1,Evento *e2)
+{
+    Fecha auxFecha1;
+    Fecha auxFecha2;
+    long fecha1Long;
+    long fecha2Long;
+    printf("hasta aca\n");
+    printf("%s \n",e1->fechaCreacion);
+    printf("%s \n",e2->fechaCreacion);
+    fecha1Long = fechaStringToFechaStruct(&auxFecha1,e1->fechaCreacion);
+    fecha2Long = fechaStringToFechaStruct(&auxFecha2,e2->fechaCreacion);
+    printf("hasta aca\n");
+    fecha1Long = fechaStructToLong(auxFecha1);
+    fecha2Long = fechaStructToLong(auxFecha2);
+    printf("hasta aca\n");
+    fecha1Long = (long)fecha1Long / 10000;
+    fecha2Long = (long)fecha2Long / 10000;
+    printf("hasta aca\n");
+
+    return fecha1Long - fecha2Long;
+
+}

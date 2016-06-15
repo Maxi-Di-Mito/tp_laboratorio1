@@ -40,7 +40,7 @@ ArrayList* al_newArrayList(void)
             pList->len=al_len;
             pList->set=al_set;
             pList->remove=al_remove;
-            pList->clear=al_clear;
+            pList->clear=;
             pList->clone=al_clone;
             pList->get=al_get;
             pList->contains=al_contains;
@@ -206,14 +206,12 @@ int al_remove(ArrayList* pList,int index)
  */
 int al_clear(ArrayList* pList)
 {
-    int i;
     if(pList == NULL)return -1;
-    for(i=0;i< pList->size;i++)
-    {
-        pList->pElements[i] = NULL;// HAY QUE HACER ESTO?
-    }
+
     pList->size = 0;
-    resizeDown(pList);
+    pList->reservedSize = 10;
+    pList->pElements = realloc(pList->pElements,10 * sizeof(void*));
+
     return 0;
 }
 
@@ -399,6 +397,25 @@ int al_sort(ArrayList* pList, int (*pFunc)(void* ,void*), int order)
     return 0;
 }
 
+ArrayList *al_filter(ArrayList* pList, int(*pFunc)(void*))
+{
+    int i,initialSize;
+    ArrayList *newArray = NULL;
+    void *auxElement = NULL;
+    if(pList == NULL)return -1;
+    if(pFunc == NULL)return -1;
+
+    newArray = al_newArrayList();
+    if(newArray == NULL)return -1;
+
+    for(i = 0; i < pList->len(pList);i++)
+    {
+        auxElement = pList->get(pList,i);
+        if(pFunc(auxElement))
+            newArray->add(auxElement);
+    }
+    return newArray;
+}
 
 
 int resizeDown(ArrayList* pList)
