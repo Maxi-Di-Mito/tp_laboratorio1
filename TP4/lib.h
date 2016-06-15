@@ -109,5 +109,26 @@ int validarFormatoFecha(char fecha[9]);
  * \return int 0 OK, -1, ERROR
  *
  */
-int fechaStringToLong(Fecha *fecha, char charfechaString[9]);
+int fechaStringToFechaStruct(Fecha *fecha, char charfechaString[9]);
 
+
+
+/** \brief Compara dos structuras evento por fecha de creacion
+ *
+ * \param e1 Evento*
+ * \param e2 Evento*
+ * \return int 0 IGUALES, positivo f1 > f2, negativo f1 < f2
+ *
+ */
+int compararEventosPorFecha(Evento *e1, Evento *e2);
+
+
+
+/** \brief devuelve un long que representa la fecha contenida en la structura
+ * en un formato comparable numericamente
+ *
+ * \param fecha Fecha
+ * \return long
+ *
+ */
+long fechaStructToLong(Fecha fecha);

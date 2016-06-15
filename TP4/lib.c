@@ -19,7 +19,8 @@ int start()
         switch(opcion)
         {
             case NUEVO:
-                crearNuevoEvento(calendario);
+                if(crearNuevoEvento(calendario))
+                    printf("Hubo un error al intentar crear el evento\n");
                 break;
             case CONSULTAR:
                 break;
@@ -28,7 +29,8 @@ int start()
             case ELIMINAR:
                 break;
             case EXPORTAR:
-                exportarCalendario(calendario);
+                if(exportarCalendario(calendario))
+                    printf("Hubo un error al intentar exportar el calendario\n");
                 break;
         }
     }while( opcion != SALIR);
@@ -92,6 +94,9 @@ int exportarCalendario(ArrayList *calendario)
 {
     int i;
     Evento *auxEvento = NULL;
+    if(calendario->sort(calendario,compararEventosPorFecha,1) == -1)
+        return -1;
+
     for(i=0;i<calendario->size;i++)
     {
         auxEvento = (Evento*)calendario->get(calendario,i);
@@ -120,10 +125,10 @@ int limpiarMemoria(ArrayList *list)
 int validarFormatoFecha(char fecha[9])
 {
     Fecha auxFecha;
-    return fechaStringToLong(&auxFecha,fecha);
+    return fechaStringToFechaStruct(&auxFecha,fecha);
 }
 
-int fechaStringToLong(Fecha *fecha, char charfechaString[9])
+int fechaStringToFechaStruct(Fecha *fecha, char charfechaString[9])
 {
     Fecha auxFecha;
     char anio[5];
@@ -154,4 +159,23 @@ int fechaStringToLong(Fecha *fecha, char charfechaString[9])
     return 0;
 }
 
+int compararEventosPorFecha(Evento *e1, Evento *e2)
+{
+    Fecha auxFecha1;
+    Fecha auxFecha2;
+    long fecha1Long;
+    long fecha2Long;
+    fecha1Long = fechaStringToFechaStruct(&auxFecha1,e1->fechaCreacion);
+    fecha2Long = fechaStringToFechaStruct(&auxFecha2,e2->fechaCreacion);
+    fecha1Long = fechaStructToLong(auxFecha1);
+    fecha2Long = fechaStructToLong(auxFecha2);
 
+    return fecha1Long - fecha2Long;
+}
+
+
+
+long fechaStructToLong(Fecha fecha)
+{
+    return (long)fecha.dia + (fecha.mes*100) + (fecha.anio * 10000);
+}
