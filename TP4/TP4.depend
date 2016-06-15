@@ -38,3 +38,42 @@
 	<string.h>
 	"slre.h"
 
+1465955857 source:c:\laboratorio\tp_laboratorio_1\md_lib\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1465955857 c:\laboratorio\tp_laboratorio_1\md_lib\arraylist.h
+
+1465959629 source:c:\laboratorio\tp_laboratorio_1\md_lib\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"slre.h"
+
+1464399632 c:\laboratorio\tp_laboratorio_1\md_lib\slre.h
+
+1464399596 source:c:\laboratorio\tp_laboratorio_1\md_lib\slre.c
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+	"slre.h"
+
+1465958856 source:c:\laboratorio\tp_laboratorio_1\tp4\main.c
+	"lib.h"
+
+1465965337 c:\laboratorio\tp_laboratorio_1\tp4\lib.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"../md_lib/lib.h"
+	"../md_lib/ArrayList.h"
+
+1465959467 c:\laboratorio\tp_laboratorio_1\md_lib\lib.h
+
+1465965634 source:c:\laboratorio\tp_laboratorio_1\tp4\lib.c
+	"lib.h"
+

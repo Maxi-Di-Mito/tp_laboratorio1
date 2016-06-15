@@ -6,6 +6,5 @@
 
 int main()
 {
-    start();
-    return 0;
+    return start();
 }

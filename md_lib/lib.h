@@ -105,3 +105,12 @@ int pedirFloat(float *dato, char* mensaje , char* errorMensaje);
  */
 void ordenar(void **lista, int size, int (*cmp)(void* ,void*),char order);
 
+
+
+
+/** \brief Muestra un mensaje y espera a que se presione una tecla
+ *
+ * \return void
+ *
+ */
+void pausa(char *msg);

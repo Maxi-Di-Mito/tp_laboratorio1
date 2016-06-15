@@ -243,5 +243,12 @@ void ordenar(void **lista, int size, int (*cmp)(void* ,void*),char order)
     }
 }
 
-
+void pausa(char *msg)
+{
+    char aux;
+    printf("%s",msg);
+    fflush(stdin);
+    scanf("%c",&aux);
+    fflush(stdin);
+}
 

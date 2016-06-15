@@ -52,7 +52,7 @@ int crearNuevoEvento(ArrayList *calendario);
  * \return int 0 OK, -1 ERROR
  *
  */
-int consultarFecha();
+int consultarFecha(ArrayList *calendario);
 
 
 /** \brief Permite buscar y modificar un evento.
@@ -60,7 +60,7 @@ int consultarFecha();
  * \return int 0 OK, -1 ERROR
  *
  */
-int modificarEvento();
+int modificarEvento(ArrayList *calendario);
 
 
 /** \brief Permite buscar y eliminar un evento.
@@ -68,7 +68,7 @@ int modificarEvento();
  * \return int
  *
  */
-int eliminarEvento();
+int eliminarEvento(ArrayList *calendario);
 
 
 /** \brief Exporta a un archivo de texto todos los eventos del calendario dentro del rango especificado.
@@ -132,3 +132,83 @@ int compararEventosPorFecha(Evento *e1, Evento *e2);
  *
  */
 long fechaStructToLong(Fecha fecha);
+
+
+
+/** \brief Buscar el archivo binario previo y carga sus datos en memoria.
+ *
+ * \param calendario ArrayList*
+ * \return int
+ *
+ */
+int cargarEventosDeArchivo(ArrayList *calendario);
+
+
+
+
+/** \brief Graba los eventos en memoria en un archivo binario
+ *
+ * \param calendario ArrayList*
+ * \return int
+ *
+ */
+int guardarEventosEnArchivo(ArrayList *calendario);
+
+
+
+
+
+/** \brief Genera un archivo txt con todos los eventos
+ *
+ * \param calendario ArrayList*
+ * \return int
+ *
+ */
+int exportarEventosAArchivo(ArrayList *calendario);
+
+
+
+
+
+/** \brief Limpiar todos los datos del calendario en memoria
+ *
+ * \param calendario ArrayList*
+ * \return int
+ *
+ */
+int limpiarCalendario(ArrayList *calendario);
+
+
+
+
+
+/** \brief Pide el ingreso de una fecha con formato AAAAMMDD y valida
+ *
+ * \param dato char*
+ * \return int
+ *
+ */
+int pedirFecha(char* msg,char* dato);
+
+
+
+/** \brief Calcula una sublista de eventos con un rango de fechas
+ *
+ * \param calendario ArrayList*
+ * \param fechaInicio[9] char
+ * \param fechaFinal[9] char
+ * \return ArrayList*
+ *
+ */
+ArrayList *calcularRango(ArrayList *calendario,char fechaInicio[9],char fechaFinal[9]);
+
+
+
+
+/** \brief Imprime todos los eventos ordenados por fecha y con un id segun su posicion
+ *
+ * \param calendario ArrayList*
+ * \return int 0 OK, -1 ERROR
+ *
+ */
+int imprimirEventos(ArrayList *calendario);
