@@ -31,6 +31,22 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="../md_lib/ArrayList.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../md_lib/ArrayList.h" />
+		<Unit filename="../md_lib/lib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../md_lib/lib.h" />
+		<Unit filename="../md_lib/slre.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../md_lib/slre.h" />
+		<Unit filename="lib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
