@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ArrayList.h"
+#include "../inc/ArrayList.h"
 
 // funciones privadas
 int resizeUp(ArrayList* pList);
@@ -299,8 +299,6 @@ int al_isEmpty(ArrayList* pList)
 }
 
 
-
-
 /** \brief Remove the item at the given position in the list, and return it.
  * \param pList ArrayList* Pointer to arrayList
  * \param index int Index of the element
@@ -348,8 +346,6 @@ ArrayList* al_subList(ArrayList* pList,int from,int to)
 
     return aux;
 }
-
-
 
 
 
@@ -417,7 +413,6 @@ int resizeDown(ArrayList* pList)
     return 0;
 }
 
-
 /** \brief Increment the number of elements in pList in AL_INCREMENT elements.
  * \param pList ArrayList* Pointer to arrayList
  * \return int Return (-1) if Error [pList is NULL pointer or if can't allocate memory]
@@ -484,6 +479,45 @@ int contract(ArrayList* pList,int index)
 
     return 0;
 }
+void swap(void *vp1,void *vp2,int size)
+{
+  void *buf = malloc(size);
+  memcpy(buf,vp1,size);
+  memcpy(vp1,vp2,size);
+  memcpy(vp2,buf,size);  //memcpy ->inbuilt function in std-c
+}
+
+// COPIADO DE MI MD_LIB
+void ordenar(void **lista, int size, int (*cmp)(void* ,void*),char order)
+{
+    int i,j;
+    void* auxSwap;
+    for(i=0;i<size-1;i++)
+    {
+        for(j=i+1;j<size;j++)
+        {
+            if( order == 'a')
+            {
+                if(cmp(lista[i],lista[j]) > 0)
+                {
+                    auxSwap = lista[i];
+                    lista[i] = lista[j];
+                    lista[j] = auxSwap;
+                }
+            }
+            if(order == 'd')
+            {
+                if(cmp(lista[i],lista[j]) < 0)
+                {
+                    auxSwap = lista[i];
+                    lista[i] = lista[j];
+                    lista[j] = auxSwap;
+                }
+            }
+        }
+    }
+}
+
 
 
 

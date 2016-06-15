@@ -1,13 +1,40 @@
 # depslib dependency file v1.0
-1446667744 source:c:\repo\tp_laboratorio_1\tp4\main.c
+1465946587 source:c:\repo\tp_laboratorio_1\md_lib\lib.c
 	<stdio.h>
 	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"slre.h"
 
-1463521274 source:c:\repo\tp_laboratorio_1\tp4\utest.c
-	"utest.h"
+1465943096 c:\repo\tp_laboratorio_1\md_lib\slre.h
+
+1465946453 source:c:\repo\tp_laboratorio_1\md_lib\arraylist.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"ArrayList.h"
 
-1463521274 c:\repo\tp_laboratorio_1\tp4\utest.h
+1465943096 c:\repo\tp_laboratorio_1\md_lib\arraylist.h
+
+1465943096 c:\repo\tp_laboratorio_1\md_lib\lib.h
+
+1465948161 source:c:\repo\tp_laboratorio_1\tp4\lib.c
+	"lib.h"
+
+1465948099 c:\repo\tp_laboratorio_1\tp4\lib.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"../md_lib/lib.h"
+	"../md_lib/ArrayList.h"
+
+1465946038 source:c:\repo\tp_laboratorio_1\tp4\main.c
+	"lib.h"
+
+1465943096 source:c:\repo\tp_laboratorio_1\md_lib\slre.c
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+	"slre.h"
 

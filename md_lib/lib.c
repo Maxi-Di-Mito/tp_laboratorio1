@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "slre.h"
+
 int confirmacion(char* mensaje, char op1, char op2,int cantidadIntentos)
 {
     char c;
@@ -111,7 +112,7 @@ int pedirString(char* dato,char* msg, int max, int min, char*errorMsg)
         hayError = 0;
         printf("%s",msg);
         fflush(stdin);
-        scanf("%[^\n]",buff);
+        scanf("%[^\n]s",buff);
         if(strlen(buff) > max)
         {
             hayError = 1;
@@ -215,6 +216,7 @@ int pedirFloat(float *dato, char* mensaje , char* errorMensaje)
 void ordenar(void **lista, int size, int (*cmp)(void* ,void*),char order)
 {
     int i,j;
+    void *auxSwap;
     for(i=0;i<size-1;i++)
     {
         for(j=i+1;j<size;j++)

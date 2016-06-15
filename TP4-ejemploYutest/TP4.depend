@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1446667744 source:c:\repo\tp_laboratorio_1\tp4\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1463521274 source:c:\repo\tp_laboratorio_1\tp4\utest.c
+	"utest.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1463521274 c:\repo\tp_laboratorio_1\tp4\utest.h
+
